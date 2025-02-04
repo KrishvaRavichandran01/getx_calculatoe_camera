@@ -16,7 +16,7 @@ class _UploadState extends State<Upload> {
   Color colorbutton(){
     return Color(0xFFEDE7F6);
   }
-  var num ="";
+
 
   final CalculatorController controller =Get.put(CalculatorController());
 
