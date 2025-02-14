@@ -71,12 +71,12 @@ class _UploadState extends State<Upload> {
         ),
         ),
         Expanded(child: Container(decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(45),topRight:Radius.circular(45) ),color: Colors.white,
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight:Radius.circular(25) ),color: Colors.white,
 
         ),child: Column(
           children: [
-            Row(children: [  button('C',Color(0xFFEEEEEE),Colors.black,),button('%',Color(0xFFEEEEEE),Colors.black),button('⌫',Color(0xFFEEEEEE),Colors.black),button('÷',Color(0xFFFF9100),Colors.white),],),
-            Row(children: [  button('7',colorbutton(),Colors.black),button('8',colorbutton(),Colors.black),button('9',colorbutton(),Colors.black),button('×',Color(0xFFFF9100),Colors.white),],),
+            Row(children: [  button('C',Color(0xFFEEEEEE),Colors.black,),button('%',Color(0xFFEEEEEE),Colors.black),button('⌫',Color(0xFFEEEEEE),Colors.black),button('/',Color(0xFFFF9100),Colors.white),],),
+            Row(children: [  button('7',colorbutton(),Colors.black),button('8',colorbutton(),Colors.black),button('9',colorbutton(),Colors.black),button('*',Color(0xFFFF9100),Colors.white),],),
             Row(children: [  button('4',colorbutton(),Colors.black),button('5',colorbutton(),Colors.black),button('6',colorbutton(),Colors.black),button('-',Color(0xFFFF9100),Colors.white),],),
             Row(children: [  button('3',colorbutton(),Colors.black),button('2',colorbutton(),Colors.black),button('1',colorbutton(),Colors.black ),button('+',Color(0xFFFF9100),Colors.white),],),
 

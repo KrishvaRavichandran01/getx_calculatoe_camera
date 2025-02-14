@@ -1,14 +1,20 @@
 import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-class Imagecontroller extends GetxController{
-  RxString imagePath =''.obs;
-  Future getImage(ImageSource)async{
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource);
-    if(image != null){
-      imagePath.value =image.path.toString();
+import 'main.dart';
+
+class ImagePickerController extends GetxController {
+  var selectedImage = Rx<File?>(null);
+  final ImagePicker _picker = ImagePicker();
+  var _showbutton;
+
+
+  Future<void> pickImage(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
+    if (image != null) {
+
+      selectedImage.value = File(image.path);
+      var _showbutton =1;
     }
   }
 }

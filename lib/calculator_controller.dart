@@ -28,7 +28,7 @@ class CalculatorController extends GetxController {
       double eval = exp.evaluate(EvaluationType.REAL, cm);
       result.value = eval.toString();
     } catch (e) {
-      result.value = "Error";
+      result.value = " ";
     }
   }
 }

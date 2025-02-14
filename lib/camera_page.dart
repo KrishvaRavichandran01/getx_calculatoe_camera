@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,19 +7,25 @@ import 'package:get/get_instance/get_instance.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:test_process/camera_controller.dart';
+import 'package:iconify_flutter/icons/ph.dart';
+import 'package:iconify_flutter/icons/teenyicons.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:flutter/cupertino.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Imagecontroller controller = Get.put(Imagecontroller());
-    return ListView(
-      scrollDirection: Axis.vertical,
+    final ImagePickerController controller = Get.put(ImagePickerController());
+    button(){
+      return Get.bottomSheet(backgroundColor:Color(0XFFFFFFEEE),Container(margin:EdgeInsets.only(left: 20,top: 20),height: 200,child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [Text("Upload via",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+        ListTile(onTap: (){controller.pickImage(ImageSource.camera);},leading:Image.network(height: 25,'https://t4.ftcdn.net/jpg/01/07/57/91/360_F_107579101_QVlTG43Fwg9Q6ggwF436MPIBTVpaKKtb.jpg'),title: Text("Camera",style: TextStyle(fontWeight: FontWeight.w500),),)
+        ,Divider()
+        , ListTile(onTap:()=> controller.pickImage(ImageSource.gallery),leading: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(height: 25,"https://img.favpng.com/15/7/23/computer-icons-download-user-interface-png-favpng-UgJFdMY0hUh7d2SSVc91E4DdW.jpg"),),title: Text('  Gallery',style: TextStyle(fontWeight: FontWeight.w500),),)],),),shape:const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))) );
+    }
+    return Scaffold(body: SafeArea(child: Column(
       children: [
-        SizedBox(
-          height: 30,
-        ),
-        Container(
-          height: 50,
+        Expanded(flex:1,child: Padding(
+          padding: const EdgeInsets.only(top: 20),
           child: ListTile(
             leading: CircleAvatar(
               radius: 40,
@@ -32,73 +38,53 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
           ),
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        Container(
-          decoration: BoxDecoration(
-              color: Color(0xFFFFFFFF),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40), topRight: Radius.circular(40))),
-          height: 800,
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 50,
-                  child: Text(
-                    'Upload Picture',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),),
+        Expanded(flex:7,child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+                child: Container(decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(topLeft:Radius.circular(25),topRight: Radius.circular(25))),child: Column(children: [
+                  Container(margin: EdgeInsets.only(top: 30),
+                    child: Text(
+                      'Upload Picture',
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                    height: 400,
-                    width: 400,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFEEEE),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        )),
-                    child: Column(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
+                    child: Stack( alignment: Alignment.center,
                       children: [
-                        Obx(() {
-                          // Display selected image or a placeholder
-                          return controller.imagePath.value == ''
-                              ? Text("No image selected", style: TextStyle(fontSize: 16))
-                              : Image.file(
-                            File(controller.imagePath.toString()),
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          );
-                        }),
-                        SizedBox(height: 100,),
-                        FloatingActionButton( child:Icon(Icons.add,size: 50,color: Colors.white,),backgroundColor: Color(0xFF651FFF),
-                            shape: CircleBorder(),onPressed: (){
-                              showModalBottomSheet(context: context, builder:(BuildContext context){
-                                return Column( mainAxisAlignment:MainAxisAlignment.start,
-                                  children: [ SizedBox(height: 100,),
+                        Container(  child: Center(
+                            child: Obx((){return
+                              controller.selectedImage.value != null?
+                              Image.file(controller.selectedImage.value!,height: double.infinity,width: double.infinity,fit:BoxFit.fill,):
+                              FloatingActionButton(backgroundColor: Color(0xFF651FFF),
+                                child: Icon(CupertinoIcons.add,size: 50,color: Colors.white,),shape: CircleBorder(),onPressed: (){button();},);}))
 
 
-                                    ElevatedButton(onPressed:()=>controller.getImage(ImageSource.camera),
-                                        child:ListTile(leading: Icon(Icons.camera_alt_outlined,size: 30,),title: Text("Camera"),)),
-                                    Divider(height: 40,),
-                                    ElevatedButton(onPressed:()=>controller.getImage(ImageSource.gallery),
-                                        child:ListTile(leading: Icon(Icons.photo_size_select_actual_outlined,size:30),title: Text("Gallery"),)),
+                          ,
+                          decoration: BoxDecoration(borderRadius:BorderRadius.all(Radius.circular(30)),
+                            color: Color(0xFFEEEEEE), ),height: MediaQuery.of(context).size.height*0.4,  ),
 
-                                  ],);
-                              } );
-                            })],)
 
-                ),
 
-              ],
+                      ],
+                    ),
+                  ),
+
+                  Obx(() {return Visibility(
+                    visible: controller.selectedImage.value != null,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [FloatingActionButton(backgroundColor: Color(0xFF651FFF),child: Iconify(Ph.note_pencil_duotone,color: Colors.white,size: 30,),onPressed: (){button();},shape: CircleBorder(),),SizedBox(width: 50,),FloatingActionButton(backgroundColor: Color(0xFF651FFF),child: Iconify(Teenyicons.tick_solid,color: Colors.white,size: 30,),onPressed: (){},shape: CircleBorder(),)],),
+                    ),
+
+                  );})],),)
             ),
-          ),
-        ),
+
+
+
+          ],
+
+        ),)
       ],
-    );}}
+    )),);}}

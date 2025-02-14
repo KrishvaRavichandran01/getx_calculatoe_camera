@@ -13,6 +13,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       body: Obx(() {
@@ -28,14 +29,17 @@ class MainScreen extends StatelessWidget {
       }),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
+
+          selectedItemColor: Color(0xFF651FFF),
           currentIndex: navController.selectedIndex.value,
           onTap: (index) {
             navController.changePage(index); // Update the selected tab
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: Icon(Icons.home_outlined),
+              label: 'Provider',
+
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.group_work_outlined),
@@ -43,7 +47,7 @@ class MainScreen extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.photo),
-              label: 'Profile',
+              label: 'Upload',
             ),
           ],
         );
