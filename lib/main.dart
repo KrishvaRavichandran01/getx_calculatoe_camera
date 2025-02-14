@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.pinkAccent,
+        primaryColor: Color(0xFFEDE7F6),
         scaffoldBackgroundColor: Color(0xFFEDE7F6),
 
 
