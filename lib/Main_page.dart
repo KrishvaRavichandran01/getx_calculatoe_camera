@@ -5,6 +5,8 @@ import 'package:test_process/camera_page.dart';
 import 'package:test_process/home_controller.dart';
 import 'package:test_process/home_page.dart';
 import 'package:test_process/second_page.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ic.dart';
 
 
 
@@ -42,7 +44,7 @@ class MainScreen extends StatelessWidget {
 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.group_work_outlined),
+              icon: Iconify(Ic.outline_spoke),
               label: 'Getx',
             ),
             BottomNavigationBarItem(
